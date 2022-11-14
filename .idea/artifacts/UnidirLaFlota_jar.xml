@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="UnidirLaFlota:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/UnidirLaFlota_jar</output-path>
+    <root id="archive" name="UnidirLaFlota.jar">
+      <element id="module-output" name="UnidirLaFlota" />
+    </root>
+  </artifact>
+</component>

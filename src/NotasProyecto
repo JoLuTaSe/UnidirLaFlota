@@ -1,0 +1,85 @@
+/*  NOTAS PREVIAS:
+
+1. Esta cabecera es orientativa
+
+2. Se deben crear clases que reunan métodos relacionados. Ej: clase Entrada con los métodos necesarios para obtener datos de usuario.
+
+3. El usuario entrará las coordenadas de fila y columna en un único paso. Ejemplo: A0 (correcto), A 0 (incorrecto), 0A (incorrecto).
+
+*/
+
+// Métodos a implementar
+// Metodo que implementa el disparo del jugador
+
+public static boolean disparoJugador (char[][] tableroDisparosJugador, char[][] tableroPC){}
+
+
+// Metodo que implementa el disparo del PC
+
+public static boolean disparoPC(char[][] tableroDisparosPC, char[][] tableroJugador){}
+
+
+/* Este metodo inicializa cada tablero de la siguiente manera:
+
+A ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
+B ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
+C ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
+D ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
+E ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
+F ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
+G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
+H ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
+I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
+J ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
+ 0 1 2 3 4 5 6 7 8 9 */
+
+public static void inicializarTablero(char[][] tablero){}
+
+
+//Este metodo visualiza el tablero por pantalla
+
+public static void visualizarTablero(char[][] tablero,char[][] tableroDisparos){}
+
+
+//Este metodo borra la terminal
+
+public static void borrarPantalla(){}
+
+
+// Este metodo suma todos los valores de un vector
+
+public static int sumaCeldas(int[] unVector){}
+
+
+//Este metodo coloca los barcos pasados como vector dentro del tablero del Jugador
+
+public static void colocarBarcosJugador(char[][] tablero, int[] barcos){}
+
+
+//Este metodo coloca los barcos pasados como vector dentro del tablero del PC
+
+public static void colocarBarcosPC(char[][] tablero,int[] barcos){}
+
+
+//Este metodo comprueba si hay algun barco en la zona del barco a colocar
+
+public static boolean hayColision(char[][] tablero, int longitudBarco, int fila, int columna, int orientacion){}
+
+
+//Este metodo comprueba si el barco está en los límites del tablero
+
+public static boolean cabeBarco(char[][] tablero, int longitudBarco, int fila, int columna, int orientacion){}
+
+//Este metodo coloca un barco en una posicion si este cabe en tablero y no coincide ninguna posicion con otro barco en la zona
+
+public static boolean colocarBarco(char[][] tablero, int longitudBarco, int fila, int columna, int orientacion,boolean jugador){}
