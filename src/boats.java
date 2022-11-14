@@ -47,7 +47,7 @@ public class boats {
             for (int j = 1; j < longitud; j++){
 
                 if (sea[coor1][coor2+j].compareTo("~  ") != 0) {
-                    vValid = false;
+                    hValid = false;
                     break;
                 }
             }
