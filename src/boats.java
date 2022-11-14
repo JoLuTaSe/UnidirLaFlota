@@ -8,7 +8,7 @@ public class boats {
         for (int i = 0; i<barcos.length; i++) {
             System.out.println("Vamos a colocar barcos de longitud " + (i+1));
             for (int j = 0; j < barcos[i]; j++) {
-                System.out.println("Coloca el barco de longitud " + (i+1) + ", número (" + (j+1) + "/" + barcos[i] + ")");
+                System.out.println("Coloca el barco de longitud " + (i+1) + ", número (" + (j+1) + "/" + barcos[i] + ")(la coordenada dada sera la parte de la izquierda en caso de colocarlo en horizontal y en en la parte de arriba en caso de vertical");
                 coordenada = basicMethods.askCoordinate(sea);
                 if(i==0){
                     sea[coordenada[0]][coordenada[1]] = "O  ";
@@ -56,8 +56,19 @@ public class boats {
         do {
             System.out.println("Como quieres colocarla horizontalmente(h) o verticalmente(v)");
             hov = sc.next();
-
-        }while (hovValid);
+            if (hov.compareTo("v")!=0 && hov.compareTo("v")!=0){
+                hovValid = false;
+                System.out.println("Error: 2.1, valores no conocidos.");
+            }
+            if (hov.equals("v") && !vValid){
+                hovValid = false;
+                System.out.println("Error: 2.2, es imposible colocar verticalmente en esas coordenadas");
+            }
+            if (hov.equals("h") && !hValid){
+                hovValid = false;
+                System.out.println("Error: 2.3, es imposible colocar horizontalmente en esas coordenadas");
+            }
+        }while (!hovValid);
 
         return hov;
     }
