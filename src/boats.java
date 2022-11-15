@@ -2,35 +2,46 @@ import java.util.Scanner;
 
 public class boats {
     public static void placeBoats(String[][] sea){
-        Scanner sc = new Scanner(System.in);
         int[] barcos = { 3, 3, 2, 1, 1};
-        int[] coordenada = new int[2];
+        int coor1;
+        int coor2;
+        String coordenada;
         for (int i = 0; i<barcos.length; i++) {
-            System.out.println("Vamos a colocar barcos de longitud " + (i+1));
             for (int j = 0; j < barcos[i]; j++) {
                 System.out.println("Coloca el barco de longitud " + (i+1) + ", número (" + (j+1) + "/" + barcos[i] + ")(la coordenada dada sera la parte de la izquierda en caso de colocarlo en horizontal y en en la parte de arriba en caso de vertical");
                 coordenada = basicMethods.askCoordinateboat(sea, (i+1));
+                coor1 = coordenada.charAt(0)-65;
+                coor2 = Integer.valueOf(coordenada.substring(1));
                 if(i==0){
-                    sea[coordenada[0]][coordenada[1]] = "O  ";
+                    sea[coor1][coor2] = "O  ";
                 }else {
-                    orientation(sea, coordenada, (i + 1));
+                    orientation(sea, coor1, coor2, (i + 1));
                 }
+                basicMethods.showSea(sea);
             }
         }
     }
-    public static void orientation (String[][] sea, int[] coor, int longitud) {
+    public static void orientation (String[][] sea, int coor1, int coor2, int longitud) {
         String hov;
-        hov = comporveorientation(sea, coor, longitud);
+        hov = comproveorientation(sea, coor1, coor2, longitud);
+        if (hov.equals("h")){
+            for (int i= coor2; i<longitud+coor2; i++){
+                sea[coor1][i]= "O  ";
+            }
+        }
+        if (hov.equals("v")){
+            for (int j = coor1; j<longitud+coor1;j++){
+                sea[j][coor2] = "O  ";
+            }
+        }
     }
-    public static String comporveorientation(String[][] sea,int[] coor, int longitud){
+    public static String comproveorientation(String[][] sea,int coor1,int coor2 , int longitud){
         Scanner sc = new Scanner(System.in);
-        String hov="";
-        int coor1 = coor[0];
-        int coor2 = coor[1];
+        String hov;
         boolean vValid = true;
         boolean hValid = true;
-        boolean hovValid = true;
-        if (longitud-1+coor1>= sea.length){
+        boolean hovValid;
+        if (longitud-1+coor1>= 11){
             vValid = false;
         }else {
             for (int i = 1; i < longitud; i++){
@@ -41,8 +52,8 @@ public class boats {
                 }
             }
         }
-        if (longitud-1+coor2>= sea[coor1].length){
-            vValid = false;
+        if (longitud-1+coor2>= 10){
+            hValid = false;
         }else {
             for (int j = 1; j < longitud; j++){
 
@@ -54,9 +65,10 @@ public class boats {
         }
 
         do {
+            hovValid = true;
             System.out.println("Como quieres colocarla horizontalmente(h) o verticalmente(v)");
             hov = sc.next();
-            if (hov.compareTo("h")!=0 || hov.compareTo("v")!=0){
+            if (hov.compareTo("h")!=0 && hov.compareTo("v")!=0){
                 hovValid = false;
                 System.out.println("Error: 2.1, valores no conocidos.");
             }
