@@ -29,9 +29,13 @@ public class basicMethods {
         }
 
     }
-    public static int[] askCoordinate(String[][] sea){
+    public static int[] askCoordinateboat(String[][] sea, int longitud){
         Scanner sc = new Scanner(System.in);
         int[] coordenada = new int[2];
+        int coor1=0;
+        int coor2=0;
+        boolean vValid = true;
+        boolean hValid = true;
         String coordinate;
         boolean valid;
         do {
@@ -54,11 +58,40 @@ public class basicMethods {
                 valid= false;
                 System.out.println("error:1.4 la cordenada ya ha sido expresada");
             }
+            if (valid && longitud>1) {
+                coor1 = coordinate.charAt(0)-65;
+                coor2 = coordinate.charAt(1);
+                if (longitud - 1 + coor1 >= sea.length) {
+                    vValid = false;
+                } else {
+                    for (int i = 1; i < longitud; i++) {
+
+                        if (sea[i + coor1][coor2].compareTo("~  ") != 0) {
+                            vValid = false;
+                            break;
+                        }
+                    }
+                }
+                if (longitud - 1 + coor2 >= sea[coor1].length) {
+                    vValid = false;
+                } else {
+                    for (int j = 1; j < longitud; j++) {
+
+                        if (sea[coor1][coor2 + j].compareTo("~  ") != 0) {
+                            hValid = false;
+                            break;
+                        }
+                    }
+                }
+                if (!hValid&&!vValid){
+                    System.out.println("Error:2.1, El barco ocupa mucho y no podrás colocarlo en esa posición");
+                }
+            }
 
         }while (!valid);
 
-        coordenada[0] = ((int)(coordinate.charAt(0))-65);
-        coordenada[1] = (int)(coordinate.charAt(1));
+        coordenada[0] = coor1;
+        coordenada[1] = coor2;
         return coordenada;
     }
 }

@@ -9,7 +9,7 @@ public class boats {
             System.out.println("Vamos a colocar barcos de longitud " + (i+1));
             for (int j = 0; j < barcos[i]; j++) {
                 System.out.println("Coloca el barco de longitud " + (i+1) + ", número (" + (j+1) + "/" + barcos[i] + ")(la coordenada dada sera la parte de la izquierda en caso de colocarlo en horizontal y en en la parte de arriba en caso de vertical");
-                coordenada = basicMethods.askCoordinate(sea);
+                coordenada = basicMethods.askCoordinateboat(sea, (i+1));
                 if(i==0){
                     sea[coordenada[0]][coordenada[1]] = "O  ";
                 }else {
@@ -19,14 +19,14 @@ public class boats {
         }
     }
     public static void orientation (String[][] sea, int[] coor, int longitud) {
-        int coor1= coor[0];
-        int coor2= coor[1];
         String hov;
-        hov = comporveorientation(sea, coor1, coor2, longitud);
+        hov = comporveorientation(sea, coor, longitud);
     }
-    public static String comporveorientation(String[][] sea,int coor1,int coor2, int longitud){
+    public static String comporveorientation(String[][] sea,int[] coor, int longitud){
         Scanner sc = new Scanner(System.in);
         String hov="";
+        int coor1 = coor[0];
+        int coor2 = coor[1];
         boolean vValid = true;
         boolean hValid = true;
         boolean hovValid = true;
@@ -56,7 +56,7 @@ public class boats {
         do {
             System.out.println("Como quieres colocarla horizontalmente(h) o verticalmente(v)");
             hov = sc.next();
-            if (hov.compareTo("v")!=0 && hov.compareTo("v")!=0){
+            if (hov.compareTo("h")!=0 || hov.compareTo("v")!=0){
                 hovValid = false;
                 System.out.println("Error: 2.1, valores no conocidos.");
             }
