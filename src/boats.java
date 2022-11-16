@@ -17,6 +17,7 @@ public class boats {
                 }else {
                     orientation(sea, coor1, coor2, (i + 1));
                 }
+                basicMethods.eraseScreen();
                 basicMethods.showSea(sea);
             }
         }

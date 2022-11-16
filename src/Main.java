@@ -11,8 +11,12 @@ public class Main {
         basicMethods.eraseScreen();
         basicMethods.fillSea(seaIA);
         basicMethods.fillSea(sea);
-        basicMethods.showSeaIA(seaIA);
+        /*basicMethods.showSeaIA(seaIA);
         basicMethods.showSea(sea);
         boats.placeBoats(sea);
+        basicMethods.eraseScreen();*/
+        IA.placeBoatsIA(seaIA);
+        basicMethods.showSea(seaIA);
+        basicMethods.showSea(sea);
     }
 }

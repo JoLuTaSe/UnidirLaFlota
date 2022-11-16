@@ -7,12 +7,12 @@ public class basicMethods {
     }
     public static void fillSea(char[][] sea){
         for (int i = 0; i < sea.length; i++){
-            for (int j = 0; j < 10;j++){
-                if (i== 11-1 && j>0){
+            for (int j = 0; j < (sea[i].length/2);j++){
+                if (i== (sea[i].length/2) && j>0){
                     sea[i][j]= Integer.toString(j).charAt(0);
-                }else if (j==0 && i<11-1) {
+                }else if (j==0 && i<(sea[i].length/2)) {
                     sea[i][j] = (char)('A' + i);
-                }else if (j==0 && i == 11-1){
+                }else if (j==0 && i == (sea[i].length/2)){
                     sea[i][j] = ' ';
                 }else {
                     sea[i][j] = '~';
@@ -37,6 +37,8 @@ public class basicMethods {
         }
     }
     public static void showSea(char[][] sea){
+        System.out.println();
+        System.out.println();
         System.out.println("Mapa-Usuario                            Mapa-Disparo-Usuario");
         for (int i = 0; i < sea.length; i++){
             for (int j = 0; j < sea[i].length;j++){
@@ -50,10 +52,7 @@ public class basicMethods {
 
     }
     public static void showSeaIA(char[][] sea){
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println("Mapa-IA                            Mapa-Disparo-IA");
+        System.out.println("Mapa-IA                                 Mapa-Disparo-IA");
         for (int i = 0; i < sea.length; i++){
             for (int j = 0; j < sea[i].length;j++){
                 System.out.print(sea[i][j] + "  ");
