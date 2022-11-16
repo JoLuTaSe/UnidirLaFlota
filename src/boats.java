@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class boats {
-    public static void placeBoats(String[][] sea){
+    public static void placeBoats(char[][] sea){
         int[] barcos = { 3, 3, 2, 1, 1};
         int coor1;
         int coor2;
@@ -13,7 +13,7 @@ public class boats {
                 coor1 = coordenada.charAt(0)-65;
                 coor2 = Integer.valueOf(coordenada.substring(1));
                 if(i==0){
-                    sea[coor1][coor2] = "O  ";
+                    sea[coor1][coor2] = 'O';
                 }else {
                     orientation(sea, coor1, coor2, (i + 1));
                 }
@@ -21,21 +21,21 @@ public class boats {
             }
         }
     }
-    public static void orientation (String[][] sea, int coor1, int coor2, int longitud) {
+    public static void orientation (char[][] sea, int coor1, int coor2, int longitud) {
         String hov;
         hov = comproveorientation(sea, coor1, coor2, longitud);
         if (hov.equals("h")){
             for (int i= coor2; i<longitud+coor2; i++){
-                sea[coor1][i]= "O  ";
+                sea[coor1][i]= 'O';
             }
         }
         if (hov.equals("v")){
             for (int j = coor1; j<longitud+coor1;j++){
-                sea[j][coor2] = "O  ";
+                sea[j][coor2] = 'O';
             }
         }
     }
-    public static String comproveorientation(String[][] sea,int coor1,int coor2 , int longitud){
+    public static String comproveorientation(char[][] sea,int coor1,int coor2 , int longitud){
         Scanner sc = new Scanner(System.in);
         String hov;
         boolean vValid = true;
@@ -46,7 +46,7 @@ public class boats {
         }else {
             for (int i = 1; i < longitud; i++){
 
-                if (sea[i + coor1][coor2].compareTo("~  ") != 0) {
+                if (sea[i + coor1][coor2]!='~') {
                     vValid = false;
                     break;
                 }
@@ -57,7 +57,7 @@ public class boats {
         }else {
             for (int j = 1; j < longitud; j++){
 
-                if (sea[coor1][coor2+j].compareTo("~  ") != 0) {
+                if (sea[coor1][coor2+j]!='~') {
                     hValid = false;
                     break;
                 }

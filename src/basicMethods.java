@@ -5,47 +5,67 @@ public class basicMethods {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
-    public static void fillSea(String[][] sea){
+    public static void fillSea(char[][] sea){
         for (int i = 0; i < sea.length; i++){
             for (int j = 0; j < 10;j++){
                 if (i== 11-1 && j>0){
-                    sea[i][j]= j + "  ";
+                    sea[i][j]= Integer.toString(j).charAt(0);
                 }else if (j==0 && i<11-1) {
-                    sea[i][j] = (char)('A' + i) + "  ";
+                    sea[i][j] = (char)('A' + i);
                 }else if (j==0 && i == 11-1){
-                    sea[i][j] = "   ";
+                    sea[i][j] = ' ';
                 }else {
-                    sea[i][j] = "~  ";
+                    sea[i][j] = '~';
                 }
             }
         }
         for (int i = 0; i < sea.length; i++){
-            sea[i][10] = "       ";
+            sea[i][10] = ' ';
         }
         for (int i = 0; i < sea.length; i++){
-            for (int j = 12; j < sea[i].length;j++){
-                if (i== sea.length-1 && j>12){
-                    sea[i][j]= j + "  ";
+            for (int j = 11,x = 0; j < sea[i].length;j++,x++){
+                if (i== sea.length-1 && j>11){
+                    sea[i][j]= Integer.toString(x).charAt(0);
                 }else if (j==11 && i<sea.length-1) {
-                    sea[i][j] = (char)('A' + i) + "  ";
+                    sea[i][j] = (char)('A' + i);
                 }else if (j==11 && i == sea.length-1){
-                    sea[i][j] = "   ";
+                    sea[i][j] = ' ';
                 }else {
-                    sea[i][j] = "~  ";
+                    sea[i][j] = '~';
                 }
             }
         }
     }
-    public static void showSea(String[][] sea){
+    public static void showSea(char[][] sea){
+        System.out.println("Mapa-Usuario                            Mapa-Disparo-Usuario");
         for (int i = 0; i < sea.length; i++){
             for (int j = 0; j < sea[i].length;j++){
-                System.out.print(sea[i][j]);
+                System.out.print(sea[i][j] + "  ");
+                if (j==10){
+                    System.out.print(sea[i][j] + "      ");
+                }
             }
             System.out.println();
         }
 
     }
-    public static String askCoordinateboat(String[][] sea, int longitud){
+    public static void showSeaIA(char[][] sea){
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println("Mapa-IA                            Mapa-Disparo-IA");
+        for (int i = 0; i < sea.length; i++){
+            for (int j = 0; j < sea[i].length;j++){
+                System.out.print(sea[i][j] + "  ");
+                if (j==10){
+                    System.out.print(sea[i][j] + "      ");
+                }
+            }
+            System.out.println();
+        }
+
+    }
+    public static String askCoordinateboat(char[][] sea, int longitud){
         Scanner sc = new Scanner(System.in);
         int coor1;
         int coor2;
@@ -63,13 +83,17 @@ public class basicMethods {
                 valid = false;
                 System.out.println("error:1.2 la coordenada \"y\" esta mal expresada");
             }
-            if (valid && Integer.valueOf(coordinate.substring(1))<0||Integer.valueOf(coordinate.substring(1))>9){
-                valid = false;
-                System.out.println("error:1.3 la coordenada \"x\" esta mal expresada");
+            if (valid ){
+                if (Integer.valueOf(coordinate.substring(1))<1||Integer.valueOf(coordinate.substring(1))>9) {
+                    valid = false;
+                    System.out.println("error:1.3 la coordenada \"x\" esta mal expresada");
+                }
             }
-            if (valid && sea[((int)(coordinate.charAt(0))-65)][Integer.valueOf(coordinate.substring(1))].compareTo("~  ")!=0){
-                valid= false;
-                System.out.println("error:1.4 la cordenada ya ha sido expresada");
+            if (valid){
+                if (sea[((int)(coordinate.charAt(0))-65)][Integer.valueOf(coordinate.substring(1))]!='~') {
+                    valid = false;
+                    System.out.println("error:1.4 la cordenada ya ha sido expresada");
+                }
             }
             if (valid && longitud>1) {
                 coor1 = coordinate.charAt(0)-65;
@@ -83,7 +107,7 @@ public class basicMethods {
         return coordinate;
     }
 
-    public static boolean biggboat (int coor1, int coor2, String[][] sea, int longitud){
+    public static boolean biggboat (int coor1, int coor2, char[][] sea, int longitud){
         boolean exit = true;
         boolean vValid = true;
         boolean hValid = true;
@@ -91,7 +115,7 @@ public class basicMethods {
             vValid = false;
         } else {
             for (int i = coor1; i < longitud+coor1; i++) {
-                if (sea[i][coor2].compareTo("~  ") != 0) {
+                if (sea[i][coor2]!='~') {
                     vValid = false;
                     break;
                 }
@@ -102,7 +126,7 @@ public class basicMethods {
         } else {
             for (int j = 1; j < longitud; j++) {
 
-                if (sea[coor1][coor2 + j].compareTo("~  ") != 0) {
+                if (sea[coor1][coor2 + j]!='~') {
                     hValid = false;
                     break;
                 }
