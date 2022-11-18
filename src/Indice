@@ -1,0 +1,40 @@
+En el main se ejecutan metodos y poco más.
+
+basicMethods:
+      Tenemos metodos como:
+
+           - eraseSea: que limpia la pantalla.
+           - fillSea: que crea el teclado.
+           - showSea: que muestra el teclado del usuario.
+           - showSeaIA: muestra el teclado de la IA.
+           - askCoordinateboat: que pregunta una coordenada de un barco hasta que sea una coordenada que el programa acepte.
+           - biggboat: si el barco es de una longitud mayor que 1 comprovará si es demasiado grande para colocarse en ese espacio.
+
+
+boats:
+    Tenemos los siguientes metodos:
+
+        - placeBoat: coloca todos los barcos ayudandose de los metodos (basicMethods.askCoordinateboat/orientation/basicMethods.showSea/basicMethods.eraseScreen)
+        - orientation: pide la orientación del barco al usuario.
+        - comproveorientation: comprueba si la orientación que da el usuario es valida o no.
+
+
+IA:
+    Tenemos metodos como:
+
+        - placeBoatsIA: coloca barcos aleatoriamente).
+        - aleatoryCoordinateboat: hace lo mismo que askCoordinateboat pero saca una coordenada aleatoria.
+        - biggboat: lo mismo que biggboat de "basicMethods"
+        - aleatoryOrientation: saca una orientación aleatoria.
+        - comproveOrientation: Tira una moneda que nos da horizontal o vertical y comprueba si el resultado es valido.
+
+shots:
+    Tenemos los siguientes metodos
+        - zonaGuerra: metodo  que inicia la zona de disparos.
+        - winUser: si win user es verdadero parara la batalla.
+        - winIA: si es verdadero IA habrá ganado.
+        - shotUser: contiene metodos(askCoordinateShot y Heat) y lo que hace es efectuar un disparo del usuario.
+        - shotIA: contiene metodos(aleatoryCoordinateShot y Heat) y lo que hace es efectuar un disparo de la IA.
+        - askCoordinateShot: pregunta al usuario un disparo hasta que le de una coordinada buena.
+        - Heat: comprueba si el disparo ha sido agua o tocado.
+        - aleatoryCoordinateShot: coge una coordenada aleatoria valida.
