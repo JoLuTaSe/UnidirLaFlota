@@ -118,6 +118,7 @@ public class basicMethods {
             valid = true;
             System.out.println(ANSI_RESET + ANSI_GREEN + ANSI_BLACK_BACKGROUND + "Dime la coordenada que quieras colocar el barco" + ANSI_RESET);
             coordinate = sc.next();
+            coordinate = coordinate.toUpperCase();
             if (coordinate.length() != 2) {
                 valid = false;
                 System.out.println(ANSI_RESET + ANSI_RED + ANSI_BLACK_BACKGROUND + "error:1.1 las coordenadas introducidas no tienen el formato necesario" + ANSI_RESET);
@@ -144,6 +145,11 @@ public class basicMethods {
                     System.out.println(ANSI_RESET + ANSI_RED + ANSI_BLACK_BACKGROUND + "error:1.4 la cordenada ya ha sido expresada" + ANSI_RESET);
                 }
             }
+            if (valid){
+                coor1 = coordinate.charAt(0) - 65;
+                coor2 = Integer.valueOf(coordinate.substring(1));
+                valid = spaceBoat(sea, coor1 , coor2);
+            }
             if (valid && longitud > 1) {
                 coor1 = coordinate.charAt(0) - 65;
                 coor2 = Integer.valueOf(coordinate.substring(1));
@@ -156,6 +162,36 @@ public class basicMethods {
         return coordinate;
     }
 
+    public static boolean spaceBoat (char[][] sea, int coor1 , int coor2){
+        boolean valid = true;
+        if ((coor1+1) < (sea.length-1)){
+            if (sea[coor1 + 1][coor2] != '~') {
+                valid = false;
+                System.out.println(ANSI_RESET + ANSI_RED + ANSI_BLACK_BACKGROUND + "error:1.5 posible colision con el barco de abajo deja por lo menos un espacio de agua" + ANSI_RESET);
+            }
+        }
+        if ((coor2 + 1) < (sea[0].length/2)){
+            if (sea[coor1][coor2+1] != '~') {
+                valid = false;
+                System.out.println(ANSI_RESET + ANSI_RED + ANSI_BLACK_BACKGROUND + "error:1.6 posible colision con el barco de la derecha deja por lo menos un espacio de agua" + ANSI_RESET);
+            }
+        }
+        if ((coor1-1)>=0){
+            if (sea[coor1 - 1 ][coor2] != '~') {
+                valid = false;
+                System.out.println(ANSI_RESET + ANSI_RED + ANSI_BLACK_BACKGROUND + "error:1.7 posible colision con el barco de arriba deja por lo menos un espacio de agua" + ANSI_RESET);
+            }
+        }
+        if ((coor2-1)>=1){
+            if (sea[coor1][coor2-1] != '~') {
+                valid = false;
+                System.out.println(ANSI_RESET + ANSI_RED + ANSI_BLACK_BACKGROUND + "error:1.8 posible colision con el barco de la izquierda deja por lo menos un espacio de agua" + ANSI_RESET);
+            }
+        }
+
+
+        return valid;
+    }
 
     public static boolean biggboat(int coor1, int coor2, char[][] sea, int longitud) {
         boolean exit = true;
@@ -165,8 +201,11 @@ public class basicMethods {
             vValid = false;
         } else {
             for (int i = coor1; i < longitud + coor1; i++) {
+                vValid = boats.spaceBoatBeQuaiet(sea,i,coor2);
                 if (sea[i][coor2] != '~') {
                     vValid = false;
+                }
+                if (!vValid){
                     break;
                 }
             }
@@ -175,10 +214,12 @@ public class basicMethods {
             hValid = false;
         } else {
             for (int j = 1; j < longitud; j++) {
-
+                hValid = boats.spaceBoatBeQuaiet(sea,coor1,coor2+j);
                 if (sea[coor1][coor2 + j] != '~') {
                     hValid = false;
-                    break;
+                }
+                if (!hValid){
+                 break;
                 }
             }
         }

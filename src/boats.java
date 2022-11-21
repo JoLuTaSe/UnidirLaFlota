@@ -7,7 +7,7 @@ public class boats {
         int coor1;
         int coor2;
         String coordenada;
-        for (int i = 0; i<barcos.length; i++) {
+        for (int i = barcos.length-1; i>=0; i--) {
             for (int j = 0; j < barcos[i]; j++) {
                 System.out.println(ANSI_RESET+ANSI_GREEN+ANSI_BLACK_BACKGROUND+"Coloca el barco de longitud " + (i+1) + ", número (" + (j+1) + "/" + barcos[i] + ")(la coordenada dada sera la parte de la izquierda en caso de colocarlo en horizontal y en en la parte de arriba en caso de vertical"+ANSI_RESET);
                 coordenada = basicMethods.askCoordinateboat(sea, (i+1));
@@ -58,24 +58,28 @@ public class boats {
         boolean vValid = true;
         boolean hValid = true;
         boolean hovValid;
-        if (longitud-1+coor1>= 11){
+        if (((longitud - 1) + coor1) >= 11) {
             vValid = false;
-        }else {
-            for (int i = 1; i < longitud; i++){
-
-                if (sea[i + coor1][coor2]!='~') {
+        } else {
+            for (int i = coor1; i < longitud + coor1; i++) {
+                vValid = spaceBoatBeQuaiet(sea,i,coor2);
+                if (sea[i][coor2] != '~') {
                     vValid = false;
+                }
+                if (!vValid){
                     break;
                 }
             }
         }
-        if (longitud-1+coor2>= 10){
+        if (((longitud - 1) + coor2) >= 10) {
             hValid = false;
-        }else {
-            for (int j = 1; j < longitud; j++){
-
-                if (sea[coor1][coor2+j]!='~') {
+        } else {
+            for (int j = 1; j < longitud; j++) {
+                hValid = spaceBoatBeQuaiet(sea,coor1,coor2+j);
+                if (sea[coor1][coor2 + j] != '~') {
                     hValid = false;
+                }
+                if (!hValid){
                     break;
                 }
             }
@@ -85,6 +89,7 @@ public class boats {
             hovValid = true;
             System.out.println(ANSI_RESET+ANSI_YELLOW+ANSI_BLACK_BACKGROUND+"Como quieres colocarla horizontalmente(h) o verticalmente(v)"+ANSI_RESET);
             hov = sc.next();
+            hov = hov.toLowerCase();
             if (hov.compareTo("h")!=0 && hov.compareTo("v")!=0){
                 hovValid = false;
                 System.out.println(ANSI_RESET+ANSI_RED+ANSI_BLACK_BACKGROUND+"Error: 2.1, valores no conocidos."+ANSI_RESET);
@@ -99,7 +104,37 @@ public class boats {
             }
         }while (!hovValid);
 
-        return hov;
+        return hov.toLowerCase();
+    }
+    public static boolean spaceBoatBeQuaiet (char[][] sea, int coor1 , int coor2){
+        boolean valid = true;
+        if ((coor1+1) < (sea.length-1)){
+            if (sea[coor1 + 1][coor2] != '~') {
+                valid = false;
+                //System.out.println(ANSI_RESET + ANSI_RED + ANSI_BLACK_BACKGROUND + "error:1.5 posible colision con el barco de abajo deja por lo menos un espacio de agua" + ANSI_RESET);
+            }
+        }
+        if ((coor2 + 1) < (sea[0].length/2)){
+            if (sea[coor1][coor2+1] != '~') {
+                valid = false;
+                //System.out.println(ANSI_RESET + ANSI_RED + ANSI_BLACK_BACKGROUND + "error:1.6 posible colision con el barco de la derecha deja por lo menos un espacio de agua" + ANSI_RESET);
+            }
+        }
+        if ((coor1-1)>=0){
+            if (sea[coor1 - 1 ][coor2] != '~') {
+                valid = false;
+                //System.out.println(ANSI_RESET + ANSI_RED + ANSI_BLACK_BACKGROUND + "error:1.7 posible colision con el barco de arriba deja por lo menos un espacio de agua" + ANSI_RESET);
+            }
+        }
+        if ((coor2-1)>=1){
+            if (sea[coor1][coor2-1] != '~') {
+                valid = false;
+                //System.out.println(ANSI_RESET + ANSI_RED + ANSI_BLACK_BACKGROUND + "error:1.8 posible colision con el barco de la izquierda deja por lo menos un espacio de agua" + ANSI_RESET);
+            }
+        }
+
+
+        return valid;
     }
     public static final String ANSI_BLACK = "\u001B[30m";
     public static final String ANSI_RED = "\u001B[31m";

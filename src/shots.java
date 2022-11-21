@@ -4,11 +4,13 @@ public class shots {
     public static void zonaGuerra(char[][] sea, char[][] seaIA, String mostrarIA) {
         int turn = 0;
         System.out.println(ANSI_RESET+ANSI_YELLOW+ANSI_BLUE_BACKGROUND+"¡¡¡¡¡¡¡¡ VAMOS A DISPARAR !!!!!!!"+ANSI_RESET);
-        while (!winUser(seaIA) && !winIA(sea) && turn < 50) {
+        while (!winUser(seaIA) && !winIA(sea) && turn < 70) {
             if (mostrarIA.compareTo("0")==0) {
                 basicMethods.showSeaIA(seaIA);
             }
             basicMethods.showSea(sea);
+            System.out.println("                                                      " + ANSI_RESET + ANSI_BLACK_BACKGROUND + "Turno: " + turn + "de 70" + ANSI_RESET);
+            System.out.println();
             System.out.println(ANSI_RESET+ANSI_GREEN+ANSI_BLACK_BACKGROUND+"Donde quieres disparar CAMARADA"+ANSI_RESET);
             shotUser(sea,seaIA);
             shotIA(sea,seaIA);
@@ -30,7 +32,7 @@ public class shots {
     public static boolean winUser(char[][] seaIA) {
         int contacertShots = 0;
         for (int i = 0; i < seaIA.length; i++) {
-            for (int j = 0; j < seaIA[i].length; j++) {
+            for (int j = 0; j < seaIA[i].length/2; j++) {
                 if (seaIA[i][j] == 'X') {
                     contacertShots++;
                 }
@@ -47,7 +49,7 @@ public class shots {
     public static boolean winIA(char[][] sea) {
         int contacertShots = 0;
         for (int i = 0; i < sea.length; i++) {
-            for (int j = 0; j < sea[i].length; j++) {
+            for (int j = 0; j < (sea[i].length/2); j++) {
                 if (sea[i][j] == 'X') {
                     contacertShots++;
                 }
@@ -82,7 +84,7 @@ public class shots {
             sea[coor1][coor2] = 'X';
         }else {
             seaIA[coor1][coor2+11] = 'A';
-            sea[coor1][coor2] = 'F';
+            sea[coor1][coor2] = 'A';
         }
 
     }
@@ -97,6 +99,7 @@ public class shots {
             valid = true;
             System.out.println(ANSI_RESET+ANSI_GREEN+ANSI_BLACK_BACKGROUND+"Dime la coordenada que quieras Disparar"+ANSI_RESET);
             coordinate = sc.next();
+            coordinate = coordinate.toUpperCase();
             if (coordinate.length()!=2){
                 valid = false;
                 System.out.println(ANSI_RESET+ANSI_RED+ANSI_BLACK_BACKGROUND+"error: 3.1 las coordenadas introducidas no tienen el formato necesario"+ANSI_RESET);

@@ -8,7 +8,7 @@ public class Main {
         int firstCount = 0;
         char[][] sea = new char[11][21];
         char[][] seaIA = new char[11][21];
-        System.out.println(ANSI_RESET+ANSI_PURPLE+ANSI_BLACK_BACKGROUND+"Bienvenido a HUNDIR LA FLOTA"+ANSI_RESET);
+        System.out.println(ANSI_RESET+ANSI_PURPLE+ANSI_BLACK_BACKGROUND+"¡¡¡¡Bienvenido a HUNDIR LA FLOTA!!!!"+ANSI_RESET);
         System.out.println(ANSI_RESET+ANSI_GREEN+ANSI_BLACK_BACKGROUND+"Pulsa enter para empezar"+ANSI_RESET);
         sc.next();
         basicMethods.eraseScreen();
